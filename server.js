@@ -16,6 +16,13 @@ app.get("/", (req, res) => {
   res.send("you hit server endpoint");
 });
 
+app.get("/api/user", (req, res) => {
+  res.json({
+    name: 'mo',
+    email: 'pitipon@gmail.com'
+  })
+})
+
 // port
 const port = process.env.PORT || 8000;
 
