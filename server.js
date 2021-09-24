@@ -23,6 +23,34 @@ app.get("/api/user", (req, res) => {
   })
 })
 
+
+app.get("/api/products", (req, res) => {
+  res.json([{
+    name: 'milk',
+    price: 20
+  }])
+})
+
+app.get("/api/products/:id", (req, res) => {
+  const id = req.params.id
+  res.json({
+    name: 'milk',
+    price: 20,
+    _id: id
+  })
+})
+
+app.post("/api/products/:id", (req, res) => {
+  const id = req.params.id
+  const body_name = req.body.name
+  const body_price = req.body.price
+  res.json({
+    name: body_name,
+    price: body_price,
+    _id: id
+  })
+})
+
 // port
 const port = process.env.PORT || 8000;
 
