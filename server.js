@@ -16,40 +16,99 @@ app.get("/", (req, res) => {
   res.send("you hit server endpoint");
 });
 
-app.get("/api/user", (req, res) => {
-  res.json({
-    name: 'mo',
-    email: 'pitipon@gmail.com'
-  })
+
+// Get all students
+app.get('/api/students', (req, res) => {
+
+  const students = [{
+    name: 'pitipon',
+    address: 'bkk',
+    grade: '3.0',
+    payment: true,
+    graduted: true,
+    batch: 1,
+    major: 'imba',
+    degree: 'master',
+    _id: '87733232'
+  },{
+    name: 'pitipon',
+    address: 'bkk',
+    grade: '3.0',
+    payment: true,
+    graduted: true,
+    batch: 1,
+    major: 'imba',
+    degree: 'master',
+    _id: '123232442'
+  }]
+
+  res.json(students)
 })
 
-
-app.get("/api/products", (req, res) => {
-  res.json([{
-    name: 'milk',
-    price: 20
-  }])
-})
-
-app.get("/api/products/:id", (req, res) => {
+// Get student by id
+app.get('/api/students/:id', (req,res) => {
   const id = req.params.id
-  res.json({
-    name: 'milk',
-    price: 20,
+
+  // I found this student from database by id
+  const student = {
+    name: 'pitipon',
+    address: 'bkk',
+    grade: '3.0',
+    payment: true,
+    graduted: true,
+    batch: 1,
+    major: 'imba',
+    degree: 'master',
     _id: id
-  })
+  }
+
+  res.json(student)
 })
 
-app.post("/api/products/:id", (req, res) => {
-  const id = req.params.id
+
+// Create student
+app.post('/api/students', (req, res) => {
+  // We get information to create new student from body
   const body_name = req.body.name
-  const body_price = req.body.price
-  res.json({
+  const body_batch = req.body.batch
+
+  const student = {
     name: body_name,
-    price: body_price,
+    batch: body_batch
+  }
+
+  res.json(student)
+})
+
+// Update student
+app.put('/api/students/:id', (req, res) => {
+  // get id of student that we want to update
+  const id = req.params.id
+
+  // Get Body update
+  const body_name = req.body.name
+  const body_batch = req.body.batch
+
+  const update_student = {
+    name: body_name,
+    batch: body_batch,
+    _id: id
+  }
+
+  res.json(update_student)
+})
+
+// Delete students by id
+app.delete('/api/students/:id', (req,res) => {
+  // get id of student that we want to delete
+  const id = req.params.id
+
+  res.json({
+    status: 'deleted',
     _id: id
   })
 })
+
 
 // port
 const port = process.env.PORT || 8000;
